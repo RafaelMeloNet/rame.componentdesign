@@ -1,8 +1,10 @@
 ﻿
+using rame.componentdesign.datastore.Models;
+
 namespace rame.componentdesign.datastore
 {
     public interface IDataDomain
     {
-        List<string> GetFirst(int count);
+        List<Despacho> GetFirst(int count);
     }
 }

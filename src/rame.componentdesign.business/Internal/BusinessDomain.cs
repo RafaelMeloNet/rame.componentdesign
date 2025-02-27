@@ -1,4 +1,5 @@
 ﻿using rame.componentdesign.datastore;
+using rame.componentdesign.datastore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,11 @@ namespace rame.componentdesign.business.Internal
 {
     internal class BusinessDomain(DatastoreFactory datastoreFactory) : IBusinessDomain
     {
-        public bool CheckBootstrap()
+        public List<Despacho> GetDespachos()
         {
-            List<string> stringList = datastoreFactory.DataDomain.GetFirst(count: 100);
+            List<Despacho> despachos = datastoreFactory.DataDomain.GetFirst(count: 100);
 
-            if (stringList.Count < 100)
-            {
-                throw new Exception("Count error");
-            }
-
-            return true;
+            return despachos;
         }
     }
 }

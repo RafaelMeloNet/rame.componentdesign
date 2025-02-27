@@ -15,17 +15,13 @@ namespace rame.componentdesign.datastore
 
         public DatastoreFactory(IConfiguration configuration)
         {
-            container.RegisterSingleton(() => configuration ?? throw new ArgumentNullException(nameof(configuration)));
-
-            DbContextOptions<MainDbContext> dbContextOprions = new DbContextOptionsBuilder<MainDbContext>()
+            container.RegisterSingleton(() => new DbContextOptionsBuilder<MainDbContext>()
                 .UseSqlServer(configuration.GetConnectionString("DbOrigem") ?? throw new ArgumentNullException(nameof(configuration)))
 #if DEBUG
                 .EnableSensitiveDataLogging()
                 .LogTo(message => Debug.WriteLine(message), LogLevel.Information)
 #endif
-                .Options;
-
-            container.RegisterSingleton(() => dbContextOprions);
+                .Options);
 
             container.Register<MainDbContext>(Lifestyle.Singleton);
 
